@@ -1,9 +1,0 @@
-
-public class teast {
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-			//Wer das liest hat keine Eier!
-	}
-
-}
