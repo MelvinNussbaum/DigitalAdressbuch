@@ -1,25 +1,23 @@
 package lab01.TerminErinnerung.view;
 
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import java.net.URL;
 import javax.swing.*;
 
 import lab01.TerminErinnerung.Erinnerung;
 
+
 public class ErinnerungView extends JDialog {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6447835938896858960L;
 
-	private Erinnerung erinnerung = null;	
-	
 	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
-	
-	protected final JToolBar mainToolBar = new JToolBar();
-	
-	protected final JMenuItem newMenuItem = new JMenuItem("Neue Erinnerung");
+		
+	protected final JButton neueErinnerungButton = new JButton("Neue Erinnerung", neuerEintragIcon);
 	
 	protected final JList<Erinnerung> eList = new JList<Erinnerung>();
 	
+	protected final JPanel listPanel = new JPanel();
 	
 
 	
@@ -28,17 +26,14 @@ public class ErinnerungView extends JDialog {
 	}
 	
 	private void initUI() {
-		erinnerung = new Erinnerung();
 		
 		setTitle("Erinnerungen");
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		
-	    newMenuItem.addActionListener(new ActionListener(this));
-
-	    mainToolBar.add(newMenuItem);
-		
+		add(neueErinnerungButton, BorderLayout.WEST);
+		add(listPanel, BorderLayout.SOUTH);
+		listPanel.add(eList);
 	}
 	
 	private static Icon loadIcon(String iconName) {
@@ -53,13 +48,8 @@ public class ErinnerungView extends JDialog {
 	
 	
 	public static void main(String[] args) {
-		
-		SwingUtilities.invokeLater(new Runnable() {
-		      @Override
-		      public void run() {
-		      ErinnerungView erinnerungView = new ErinnerungView();
-		      }
-		    });
-		  }
-
+		ErinnerungView gui = new ErinnerungView();
+		gui.setSize(350, 500);
+		gui.setVisible(true);
+	}
 }
