@@ -1,9 +1,9 @@
 package lab01.TerminErinnerung.view;
 
+import java.awt.event.ActionListener;
 import java.net.URL;
 import javax.swing.*;
 
-import ch.berufsbildungscenter.solution.lab14.listener.NewListener;
 import lab01.TerminErinnerung.Erinnerung;
 
 public class ErinnerungView extends JDialog {
@@ -35,7 +35,7 @@ public class ErinnerungView extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
-	    newMenuItem.addActionListener(new NewListener(this));
+	    newMenuItem.addActionListener(new ActionListener(this));
 
 	    mainToolBar.add(newMenuItem);
 		
