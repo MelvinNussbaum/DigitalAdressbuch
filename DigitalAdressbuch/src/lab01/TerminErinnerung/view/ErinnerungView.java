@@ -8,12 +8,34 @@ public class ErinnerungView extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private Erinnerung CONTROLLER = null;	
+	private Erinnerung erinnerung = null;	
 	
-	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG	");
+	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
+	
+	protected final JToolBar mainToolBar = new JToolBar();
+	
+	protected final JMenuItem newMenuItem = new JMenuItem("Neue Erinnerung");
+	
+	protected final JList<Erinnerung> eList = new JList<Erinnerung>();
 	
 	
+
 	
+	public ErinnerungView() {
+		initUI();
+	}
+	
+	private void initUI() {
+		erinnerung = new Erinnerung();
+		
+		setTitle("Erinnerungen");
+		setResizable(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		
+	    mainToolBar.add(newMenuItem);
+		
+	}
 	
 	private static Icon loadIcon(String iconName) {
 	    final URL resource = ErinnerungView.class.getResource("/images/" + iconName);
@@ -31,8 +53,7 @@ public class ErinnerungView extends JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
 		      public void run() {
-		        ErinnerungView erinnerungView = new ErinnerungView();
-		       
+		      ErinnerungView erinnerungView = new ErinnerungView();
 		      }
 		    });
 		  }
