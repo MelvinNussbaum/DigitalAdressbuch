@@ -41,7 +41,6 @@ public class ErinnerungView extends JDialog {
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		// neueErinnerungButton.setSize(100, 100);
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
