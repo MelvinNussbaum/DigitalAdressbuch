@@ -1,10 +1,12 @@
 package lab01.TerminErinnerung.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -12,51 +14,57 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import lab01.Listener.JButtonListener;
+import lab01.Roundedborder.RoundedBorder;
 import lab01.TerminErinnerung.Erinnerung;
 
 public class ErinnerungView extends JDialog {
 
 	private static final long serialVersionUID = -6447835938896858960L;
+	
+    Calendar cal = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
 	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
 
 	protected final JButton neueErinnerungButton = new JButton("Neue Erinnerung", neuerEintragIcon);
 
-	protected final List<JPanel> eList = new ArrayList<JPanel>();
-
-	protected final JPanel listPanel = new JPanel();
 	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
-	protected final JPanel southPanel = new JPanel(new GridLayout(0, 1));
+	protected final static JPanel southPanel = new JPanel();
 
-	protected final JLabel uhrzeit = new JLabel("16:06");
+	protected JLabel uhrzeit;
 
-	public ErinnerungView(Erinnerung e) {
-		initUI(e);
+	public ErinnerungView() {
+		initUI();
 	}
 
-	private void initUI(Erinnerung e) {
+	private void initUI() {
 
 		setTitle("Erinnerungen");
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+		this.setSize(new Dimension(350, 500));
+		
+		neueErinnerungButton.setBorder(new RoundedBorder(20));
+		neueErinnerungButton.setPreferredSize(new Dimension(200, 30));
+		neueErinnerungButton.addActionListener(new JButtonListener(null));
+
+		
+		
+		uhrzeit = new JLabel(sdf.format(cal.getTime()) + "  ");
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
+		uhrzeit.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
+		
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
 
 		add(northPanel, BorderLayout.NORTH);
-		getElist().add(e.createEPanel());
+		add(southPanel, BorderLayout.CENTER);
 		
-		for (JPanel ePanel : getElist()) {
-			southPanel.add(ePanel);
-		}
-		add(southPanel, BorderLayout.SOUTH);
-
-	}
-
-	public List<JPanel> getElist() {
-		return eList;
+		
 	}
 
 	private static Icon loadIcon(String iconName) {
@@ -70,11 +78,20 @@ public class ErinnerungView extends JDialog {
 	}
 
 	public static void main(String[] args) {
+		
+	    SwingUtilities.invokeLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	ErinnerungView ErinnerungView = new ErinnerungView();
+	        	ErinnerungView.pack();
+	        	ErinnerungView.setVisible(true);
+	        	Erinnerung e1 = new Erinnerung("Einkaufen", southPanel);
+	        	Erinnerung e2 = new Erinnerung("Schlafen", southPanel);
+	        }
+	      });
+	    
+		
 
-		Erinnerung e = new Erinnerung("Einkaufen");
 
-		ErinnerungView gui = new ErinnerungView(e);
-		gui.setSize(350, 500);
-		gui.setVisible(true);
 	}
 }
