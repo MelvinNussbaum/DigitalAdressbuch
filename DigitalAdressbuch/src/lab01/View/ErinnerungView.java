@@ -1,4 +1,4 @@
-package lab01.TerminErinnerung.view;
+package lab01.View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import lab01.Listener.JButtonListener;
-import lab01.Roundedborder.RoundedBorder;
-import lab01.TerminErinnerung.Erinnerung;
+import lab01.Model.Erinnerung;
+import lab01.Model.RoundedBorder;
 
 public class ErinnerungView extends JDialog {
 
@@ -60,6 +60,7 @@ public class ErinnerungView extends JDialog {
 		
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
+		
 
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
@@ -67,7 +68,7 @@ public class ErinnerungView extends JDialog {
 		
 	}
 
-	private static Icon loadIcon(String iconName) {
+	public static Icon loadIcon(String iconName) {
 		final URL resource = ErinnerungView.class.getResource("/images/" + iconName);
 
 		if (resource == null) {

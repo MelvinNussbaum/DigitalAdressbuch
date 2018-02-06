@@ -1,4 +1,4 @@
-package lab01.TerminErinnerung;
+package lab01.Model;
 
 public class Termin extends TerminErinnerung {
 	private String relevanz = null;

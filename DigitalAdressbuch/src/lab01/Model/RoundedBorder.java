@@ -1,4 +1,4 @@
-package lab01.Roundedborder;
+package lab01.Model;
 
 import java.awt.Component;
 import java.awt.Graphics;

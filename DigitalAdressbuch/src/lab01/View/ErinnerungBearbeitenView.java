@@ -1,4 +1,4 @@
-package lab01.TerminErinnerung.view;
+package lab01.View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class ErinnerungBerbeitenView extends JDialog {
+public class ErinnerungBearbeitenView extends JDialog {
 
 	private static final long serialVersionUID = 5813736857825532698L;
 	
@@ -18,14 +18,14 @@ public class ErinnerungBerbeitenView extends JDialog {
 	protected final JPanel titelPanel = new JPanel(new BorderLayout());
 	protected final JPanel datePanel = new JPanel(new BorderLayout());
 	
-	protected final JLabel titelLabel = new JLabel("Titel ");
-	protected final JLabel dateLabel = new JLabel("Datum ");
+	protected final JLabel titelLabel = new JLabel("Titel      ");
+	protected final JLabel dateLabel = new JLabel("Datum  ");
 	
 	protected final JTextField titelTF = new JTextField();
 	protected final JTextField dateTF = new JTextField();
 	
 	
-	public ErinnerungBerbeitenView() {
+	public ErinnerungBearbeitenView() {
 		initUI();
 	}
 	
@@ -36,7 +36,7 @@ public class ErinnerungBerbeitenView extends JDialog {
 		
 		this.setSize(new Dimension(350, 500));
 		
-		titelTF.setPreferredSize(new Dimension(this.getWidth()-50, 20));
+		titelTF.setPreferredSize(new Dimension(this.getWidth()-70, 20));
 		dateTF.setPreferredSize(new Dimension(this.getWidth()-70, 20));
 		
 		titelPanel.add(titelLabel, BorderLayout.WEST);

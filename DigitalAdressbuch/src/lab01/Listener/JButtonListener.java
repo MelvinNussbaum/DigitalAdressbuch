@@ -5,17 +5,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
-import lab01.TerminErinnerung.view.ErinnerungBerbeitenView;
+import lab01.View.ErinnerungBearbeitenView;
 
 public class JButtonListener implements ActionListener {
 
-	public JButtonListener(ErinnerungBerbeitenView erinnerungBerbeitenView) {
+	public JButtonListener(ErinnerungBearbeitenView erinnerungBerbeitenView) {
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Neue Erinnerung")) {
-			new ErinnerungBerbeitenView().setVisible(true);
+			new ErinnerungBearbeitenView().setVisible(true);
 		}
 	}
 

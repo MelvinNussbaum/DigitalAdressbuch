@@ -1,4 +1,4 @@
-package lab01.TerminErinnerung;
+package lab01.Model;
 
 public abstract class TerminErinnerung {
 	private String titel = "Neuer Eintrag";
