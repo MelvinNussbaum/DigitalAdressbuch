@@ -1,20 +1,24 @@
 package lab01.TerminErinnerung;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Erinnerung extends TerminErinnerung {
 	private boolean erledigt = false;
+	private JPanel ePanel;
 
-	public Erinnerung(String title) {
+	
+	public Erinnerung(String title, JPanel southPanel) {
 		this.setTitel(title);
-	}
-
-	public JPanel createEPanel() {
-		JPanel ePanel = new JPanel();
+		ePanel = new JPanel();
 		ePanel.add(new JLabel(this.getTitel()));
-		ePanel.setSize(100, 100);
-		return ePanel;
+		ePanel.setPreferredSize(new Dimension(southPanel.getWidth() - 1, 50));
+		ePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		southPanel.add(ePanel);
 	}
 
 	public boolean isErledigt() {
