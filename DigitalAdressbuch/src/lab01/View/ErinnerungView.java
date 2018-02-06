@@ -43,10 +43,9 @@ public class ErinnerungView extends JDialog {
 	private void initUI() {
 
 		setTitle("Erinnerungen");
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-		this.setSize(new Dimension(350, 500));
+		setPreferredSize(new Dimension(350, 500));
 		
 		neueErinnerungButton.setBorder(new RoundedBorder(20));
 		neueErinnerungButton.setPreferredSize(new Dimension(200, 30));

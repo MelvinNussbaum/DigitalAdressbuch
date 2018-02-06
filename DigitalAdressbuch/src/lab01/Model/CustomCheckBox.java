@@ -1,9 +1,5 @@
 package lab01.Model;
 
-import java.net.URL;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 
 import lab01.View.ErinnerungView;

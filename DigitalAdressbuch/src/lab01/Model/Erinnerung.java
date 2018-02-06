@@ -23,9 +23,9 @@ public class Erinnerung extends TerminErinnerung {
 		CustomCheckBox checkBox = new CustomCheckBox();
 		
 		checkBoxTeiler.add(checkBox);
-		titelLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
+ 		titelLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
 		ePanel.add(titelLabel, BorderLayout.NORTH);
-		ePanel.setPreferredSize(new Dimension(southPanel.getWidth() - 1, 50));
+		ePanel.setPreferredSize(new Dimension(southPanel.getWidth() - 70, 50));
 		ePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		southPanel.add(checkBoxTeiler);
 		southPanel.add(ePanel);
