@@ -2,7 +2,8 @@ package lab01.Model;
 
 public abstract class TerminErinnerung {
 	private String titel = "Neuer Eintrag";
-	private String datetime = null;
+	private String date = null;
+	private String time = null;
 	
 	
 	public String getTitel() {
@@ -11,10 +12,16 @@ public abstract class TerminErinnerung {
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
-	public String getDatetime() {
-		return datetime;
+	public String getDate() {
+		return date;
 	}
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

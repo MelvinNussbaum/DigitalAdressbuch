@@ -2,27 +2,40 @@ package lab01.View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
+import javax.swing.SwingConstants;
+
+import com.github.lgooddatepicker.components.DateTimePicker;
+
+import lab01.Listener.JButtonListener;
 
 public class ErinnerungBearbeitenView extends JDialog {
 
 	private static final long serialVersionUID = 5813736857825532698L;
 	
-	protected final JPanel bearbeitungPanel = new JPanel();
-	protected final JPanel titelPanel = new JPanel(new BorderLayout());
-	protected final JPanel datePanel = new JPanel(new BorderLayout());
+	protected final JPanel container = new JPanel(new FlowLayout(SwingConstants.RIGHT, 10, 5));
+	protected final JPanel bearbeitungPanel = new JPanel(new BorderLayout(5, 10));	
+	protected final JPanel labelPanel = new JPanel(new GridLayout(0, 1, 10, 10));
+	protected final JPanel fieldPanel = new JPanel(new GridLayout(0, 1, 10, 5));
 	
-	protected final JLabel titelLabel = new JLabel("Titel      ");
-	protected final JLabel dateLabel = new JLabel("Datum  ");
+	protected final Font bold = new Font("Sans-Serif", Font.BOLD, 15);
+	
+	protected final JLabel titelLabel = new JLabel("Titel");
+	protected final JLabel dateLabel = new JLabel("Datum");
+	
+	protected final JButton bearbeitenFertigButton = new JButton("Fertig");
+	
+	protected final DateTimePicker dateTimePicker = new DateTimePicker();
 	
 	protected final JTextField titelTF = new JTextField();
-	protected final JTextField dateTF = new JTextField();
 	
 	
 	public ErinnerungBearbeitenView() {
@@ -31,26 +44,34 @@ public class ErinnerungBearbeitenView extends JDialog {
 	
 	private void initUI() {
 		setTitle("Erinnerungen");
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+		setSize(new Dimension(350, 150));;
 		
-		this.setSize(new Dimension(350, 500));
+		titelLabel.setFont(bold);
+		dateLabel.setFont(bold);		
 		
-		titelTF.setPreferredSize(new Dimension(this.getWidth()-70, 20));
-		dateTF.setPreferredSize(new Dimension(this.getWidth()-70, 20));
+		bearbeitenFertigButton.setSize(new Dimension(100, 20));
+		bearbeitenFertigButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		bearbeitenFertigButton.addActionListener(new JButtonListener(this));
 		
-		titelPanel.add(titelLabel, BorderLayout.WEST);
-		titelPanel.add(titelTF, BorderLayout.EAST);
+		labelPanel.add(titelLabel);
+		labelPanel.add(dateLabel);
 		
-		datePanel.add(dateLabel, BorderLayout.WEST);
-		datePanel.add(dateTF, BorderLayout.EAST);
+		fieldPanel.add(titelTF);
+		fieldPanel.add(dateTimePicker);
 		
+		bearbeitungPanel.setPreferredSize(new Dimension(320, 60));
+		bearbeitungPanel.add(labelPanel, BorderLayout.WEST);
+		bearbeitungPanel.add(fieldPanel, BorderLayout.CENTER);
+
+		container.add(bearbeitungPanel);
+		container.add(bearbeitenFertigButton);
 		
-		bearbeitungPanel.add(titelPanel);
-		bearbeitungPanel.add(datePanel);
-		
-		add(bearbeitungPanel);
+		add(container);
 		
 	}
+
 	
 }

@@ -33,7 +33,7 @@ public class ErinnerungView extends JDialog {
 
 	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	protected final static JPanel southPanel = new JPanel();
-
+	
 	protected JLabel uhrzeit;
 
 	public ErinnerungView() {
@@ -49,10 +49,8 @@ public class ErinnerungView extends JDialog {
 		
 		neueErinnerungButton.setBorder(new RoundedBorder(20));
 		neueErinnerungButton.setPreferredSize(new Dimension(200, 30));
-		neueErinnerungButton.addActionListener(new JButtonListener(null));
+		neueErinnerungButton.addActionListener(new JButtonListener(this));
 
-		
-		
 		uhrzeit = new JLabel(sdf.format(cal.getTime()) + "  ");
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
 		uhrzeit.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
@@ -60,7 +58,6 @@ public class ErinnerungView extends JDialog {
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
 		
-
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
 		
