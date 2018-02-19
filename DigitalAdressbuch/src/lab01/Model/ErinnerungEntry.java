@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import lab01.Datenbank.Erinnerung.DBErinnerung;
 import lab01.Listener.EditErinnerungListener;
 import lab01.View.ErinnerungView;
 
@@ -22,16 +23,15 @@ public class ErinnerungEntry extends TerminErinnerung {
 	
 	private JLabel titelLabel;
 	private JLabel datetimeLabel;
+	private DBErinnerung erinnerungDB;
 	
-	public ErinnerungEntry() {
-		
-	}
-	
-	public ErinnerungEntry(ErinnerungView eView) {
-		titelLabel = new JLabel(this.getTitel());
-		datetimeLabel = new JLabel(getDate() + ", " + getTime());
+
+	public ErinnerungEntry(ErinnerungView eView, DBErinnerung erinnerungDB) {
+		this.erinnerungDB = erinnerungDB;
+		titelLabel = new JLabel(erinnerungDB.getErinnerungsname());
+		datetimeLabel = new JLabel(erinnerungDB.getDatum() + ", " + erinnerungDB.getZeit());
 		JPanel erinnerungLabelPanel = new JPanel(new BorderLayout());
-		this.ePanel = new JPanel(new BorderLayout());
+		ePanel = new JPanel(new BorderLayout());
 		JPanel checkBoxTeiler = new JPanel();
 		JButton editButton = new JButton(editIcon);
 		CustomCheckBox checkBox = new CustomCheckBox();
@@ -45,17 +45,18 @@ public class ErinnerungEntry extends TerminErinnerung {
  		editButton.setContentAreaFilled(false);
  		editButton.setPreferredSize(new Dimension(40, 40));
  		editButton.setActionCommand("edit");
- 		editButton.addActionListener(new EditErinnerungListener(this, eView));
+ 		editButton.addActionListener(new EditErinnerungListener(erinnerungDB, eView));
  		
  		checkBoxTeiler.add(checkBox);
  		ePanel.setBorder(BorderFactory.createRaisedBevelBorder());
+ 		ePanel.setPreferredSize(new Dimension(320, 47));;
+//		ePanel.setPreferredSize(new Dimension(300, 50));
 		erinnerungLabelPanel.add(titelLabel, BorderLayout.NORTH);
 		erinnerungLabelPanel.add(datetimeLabel, BorderLayout.SOUTH);
 		erinnerungLabelPanel.setPreferredSize(new Dimension(ePanel.getWidth() - 110, ePanel.getHeight()));
 		ePanel.add(checkBoxTeiler, BorderLayout.WEST);
 		ePanel.add(erinnerungLabelPanel, BorderLayout.CENTER);
 		ePanel.add(editButton, BorderLayout.EAST);
-		
 	}
 	
 	public JPanel getEPanel() {
@@ -74,11 +75,20 @@ public class ErinnerungEntry extends TerminErinnerung {
 	public void setTitel(String titel) {
 		super.setTitel(titel);
 		titelLabel.setText(titel);
+		
 	}
 	
 	public void setDateTime(String date, String time) {
 		super.setDate(date);
 		super.setTime(time);
 		datetimeLabel.setText(date + ", " + time);
+	}
+
+	public DBErinnerung getErinnerungDB() {
+		return erinnerungDB;
+	}
+
+	public void setErinnerungDB(DBErinnerung erinnerungDB) {
+		this.erinnerungDB = erinnerungDB;
 	}
 }

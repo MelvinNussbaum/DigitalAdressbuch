@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.net.URL;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import lab01.Datenbank.Erinnerung.DBConnectionErinnerung;
+import lab01.Datenbank.Erinnerung.DBEinnerungJDBCDao;
+import lab01.Datenbank.Erinnerung.DBErinnerung;
+import lab01.Datenbank.Erinnerung.DBErinnerungDao;
 import lab01.Listener.NeueErinnerungListener;
 import lab01.Model.ErinnerungEntry;
 import lab01.Model.RoundedBorder;
@@ -31,6 +36,9 @@ public class ErinnerungView extends JDialog {
 
 	private Calendar cal = Calendar.getInstance();
 	static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	
+	private Connection con = DBConnectionErinnerung.getInstance().getConnection();		
+	private DBErinnerungDao pd = new DBEinnerungJDBCDao(con);
 
 	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
 
@@ -46,15 +54,22 @@ public class ErinnerungView extends JDialog {
 	}
 
 	private void initUI() {
-
+		
 		setTitle("Erinnerungen");
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(350, 500));
-
+		
+		for (DBErinnerung entry : pd.getAllErinnerung()) {
+			entries.add(new ErinnerungEntry(this, entry).getEPanel());
+		}
+		for (JPanel entry : entries) {
+			southPanel.add(entry);
+		}
+		
 		neueErinnerungButton.setBorder(new RoundedBorder(20));
 		neueErinnerungButton.setPreferredSize(new Dimension(200, 30));
-		neueErinnerungButton.addActionListener(new NeueErinnerungListener(this, new ErinnerungEntry(this)));
+		neueErinnerungButton.addActionListener(new NeueErinnerungListener(this, new DBErinnerung()));
 
 		uhrzeit = new JLabel(sdf.format(getCal().getTime()) + "  ");
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
@@ -67,9 +82,19 @@ public class ErinnerungView extends JDialog {
 
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
+		
 
 	}
-
+	
+	private void updateUI() {
+		southPanel.removeAll();
+		
+		for (JPanel entry : entries) {
+			southPanel.add(entry);
+		}
+		this.revalidate();
+		this.repaint();
+	}
 
 	public static Icon loadIcon(String iconName) {
 		final URL resource = ErinnerungView.class.getResource("/images/" + iconName);
@@ -81,15 +106,21 @@ public class ErinnerungView extends JDialog {
 		return new ImageIcon(resource);
 	}
 
-	public void addErinnerungEntry(ErinnerungEntry erinnerungEntry) {
-		if (erinnerungEntry != null) {
-			erinnerungEntry.getEPanel().setPreferredSize(new Dimension(southPanel.getWidth()-10, 48));
-			entries.add(erinnerungEntry.getEPanel());
-			for (JPanel entry : entries) {
-				southPanel.add(entry);
-			}
+	public void addErinnerungEntry(DBErinnerung erinnerungDB, boolean isNewEntry) {
+		if (isNewEntry) {
+			pd.insertErinnerung(erinnerungDB);
+			ErinnerungEntry eEntry = new ErinnerungEntry(this, erinnerungDB);
+			entries.add(eEntry.getEPanel());
+		} else {
+			pd.updateErinnerungDatum(erinnerungDB);
+			pd.updateErinnerungDatum(erinnerungDB);
+			pd.updateErinnerungZeit(erinnerungDB);
+			
 		}
+		updateUI();
 	}
+	
+
 
 	public static SimpleDateFormat getSdf() {
 		return sdf;

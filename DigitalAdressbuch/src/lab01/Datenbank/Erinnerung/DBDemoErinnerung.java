@@ -32,14 +32,14 @@ public class DBDemoErinnerung {
 //
 //		
 		
-		for (DBErinnerung erinnerung : pd.getAllErinnerung()) {
-			System.out.println(erinnerung.toString());
-		}
-		
-//		p.setErinnerungsname("Blumen giessen");	
-//		for (DBErinnerung erinnerung : pd.findErinnerungByName(p)) {
-//		System.out.println(erinnerung.toString());
+//		for (DBErinnerung erinnerung : pd.getAllErinnerung()) {
+//			System.out.println(erinnerung.toString());
 //		}
+		
+		p.setErinnerungsname("Blumen giessen");	
+		for (DBErinnerung erinnerung : pd.findErinnerungByName(p)) {
+		System.out.println(erinnerung.toString());
+		}
 		
 
 		DBConnectionErinnerung.getInstance().closeConnection();

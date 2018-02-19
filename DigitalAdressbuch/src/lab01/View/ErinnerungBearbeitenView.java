@@ -15,14 +15,14 @@ import javax.swing.SwingConstants;
 
 import com.github.lgooddatepicker.components.DateTimePicker;
 
+import lab01.Datenbank.Erinnerung.DBErinnerung;
 import lab01.Listener.SafeErinnerungListener;
-import lab01.Model.ErinnerungEntry;
 
 public class ErinnerungBearbeitenView extends JDialog {
 
 	private static final long serialVersionUID = 5813736857825532698L;
 	
-	private ErinnerungEntry erinnerungEntry;
+	private DBErinnerung erinnerungDB;
 	private ErinnerungView eView;
 	private boolean isNewEntry;
 	
@@ -46,9 +46,9 @@ public class ErinnerungBearbeitenView extends JDialog {
 
 	
 	
-	public ErinnerungBearbeitenView(ErinnerungView eView, ErinnerungEntry erinnerungEntry, boolean isNewEntry) {
+	public ErinnerungBearbeitenView(ErinnerungView eView, DBErinnerung erinnerungDB, boolean isNewEntry) {
 		this.eView = eView;
-		this.erinnerungEntry = erinnerungEntry;
+		this.erinnerungDB = erinnerungDB;
 		this.isNewEntry = isNewEntry;
 		initUI();
 	}
@@ -65,7 +65,7 @@ public class ErinnerungBearbeitenView extends JDialog {
 		
 		bearbeitenFertigButton.setSize(new Dimension(100, 20));
 		bearbeitenFertigButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		bearbeitenFertigButton.addActionListener(new SafeErinnerungListener(this, erinnerungEntry, eView, isNewEntry));
+		bearbeitenFertigButton.addActionListener(new SafeErinnerungListener(this, erinnerungDB, eView, isNewEntry));
 		
 		labelPanel.add(titelLabel);
 		labelPanel.add(dateLabel);
