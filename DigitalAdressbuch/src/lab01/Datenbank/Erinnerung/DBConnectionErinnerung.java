@@ -16,8 +16,6 @@ public class DBConnectionErinnerung {
 
 	private Connection connection = null;
 
-	private DBConnectionErinnerung() {
-	}
 
 	public Connection getConnection() {
 		if (connection == null) {
