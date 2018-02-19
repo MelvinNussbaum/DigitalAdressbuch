@@ -1,4 +1,4 @@
-package Datenbank;
+package DatenbankPerson;
 
 
 public class DBPerson {

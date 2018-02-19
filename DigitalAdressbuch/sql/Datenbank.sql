@@ -21,6 +21,8 @@ values
 
 explain person;
 
+DELETE FROM person WHERE id = 2;
+
 select*from person;
 
 drop table person; 
@@ -64,4 +66,13 @@ select*from termine;
 
 drop table termine;
 
-alter table person
+alter table person;
+
+create table erinnerungen (
+id int not null auto_increment primary key,
+zeit varchar(45),
+datum varchar(45),
+erinnerungsname varchar(45)
+);
+
+drop table erinnerungen;

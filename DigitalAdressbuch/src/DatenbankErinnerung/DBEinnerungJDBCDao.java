@@ -1,0 +1,123 @@
+package DatenbankErinnerung;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DBEinnerungJDBCDao implements DBErinnerungDao {
+
+	private Connection con = null;
+
+	public DBEinnerungJDBCDao(Connection connection) {
+		con = connection;
+	}
+
+	public void insertErinnerung(DBErinnerung p) {
+		try {
+			String sql = "INSERT INTO erinnerungen (zeit, datum, erinnerungsname) VALUES (?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getZeit());
+			ps.setString(2, p.getDatum());
+			ps.setString(3, p.getErinnerungsname());
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Insert Complete.");
+		}
+	}
+
+	public List<DBErinnerung> findErinnerungByName(DBErinnerung p) {
+		try {
+			List<DBErinnerung> erinnerungen = new ArrayList<DBErinnerung>();
+			String sql = "SELECT * FROM erinnerungen where erinnerungsname = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getErinnerungsname());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				p = new DBErinnerung();
+				p.setId(rs.getInt("id"));
+				p.setZeit(rs.getString("zeit"));
+				p.setDatum(rs.getString("datum"));
+				p.setErinnerungsname(rs.getString("erinnerungsname"));
+				erinnerungen.add(p);}
+			return erinnerungen;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	public List<DBErinnerung> getAllErinnerung() {
+		try {
+			List<DBErinnerung> erinnerungen = new ArrayList<DBErinnerung>();
+			DBErinnerung p = null;
+			String sql = "SELECT * FROM erinnerungen";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				p = new DBErinnerung();
+				p.setId(rs.getInt("id"));
+				p.setZeit(rs.getString("zeit"));
+				p.setDatum(rs.getString("datum"));
+				p.setErinnerungsname(rs.getString("erinnerungsname"));
+				erinnerungen.add(p);}
+			return erinnerungen;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	public void deleteErinnerung(DBErinnerung p) {
+		try {
+			String sql = "DELETE FROM erinnerungen WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, p.getId());
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Delete Complete.");
+		}
+	}
+	public void updateErinnerungZeit(DBErinnerung p) {
+		try {
+			String sql = "Update erinnerungen set zeit = ? where id = ? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getZeit());
+			ps.setInt(2, p.getId());
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Update Zeit Complete. ");
+		}
+	}
+	public void updateErinnerungDatum(DBErinnerung p) {
+		try {
+			String sql = "Update erinnerungen set datum = ? where id = ? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getDatum());
+			ps.setInt(2, p.getId());
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Update Datum Complete. ");
+		}
+	}
+	public void updateErinnerungName(DBErinnerung p) {
+		try {
+			String sql = "Update erinnerungen set erinnerungsname = ? where id = ? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getErinnerungsname());
+			ps.setInt(2, p.getId());
+			ps.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Update Erinnerungsname Complete. ");
+		}
+	}
+
+}
