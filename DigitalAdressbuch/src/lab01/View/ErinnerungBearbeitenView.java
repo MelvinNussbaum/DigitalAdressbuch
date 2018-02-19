@@ -15,11 +15,17 @@ import javax.swing.SwingConstants;
 
 import com.github.lgooddatepicker.components.DateTimePicker;
 
-import lab01.Listener.JButtonListener;
+import lab01.Listener.SafeErinnerungListener;
+import lab01.Model.ErinnerungEntry;
 
 public class ErinnerungBearbeitenView extends JDialog {
 
 	private static final long serialVersionUID = 5813736857825532698L;
+	
+	private ErinnerungEntry erinnerungEntry;
+	private ErinnerungView eView;
+	private boolean isNewEntry;
+	
 	
 	protected final JPanel container = new JPanel(new FlowLayout(SwingConstants.RIGHT, 10, 5));
 	protected final JPanel bearbeitungPanel = new JPanel(new BorderLayout(5, 10));	
@@ -36,9 +42,14 @@ public class ErinnerungBearbeitenView extends JDialog {
 	protected final DateTimePicker dateTimePicker = new DateTimePicker();
 	
 	protected final JTextField titelTF = new JTextField();
+
+
 	
 	
-	public ErinnerungBearbeitenView() {
+	public ErinnerungBearbeitenView(ErinnerungView eView, ErinnerungEntry erinnerungEntry, boolean isNewEntry) {
+		this.eView = eView;
+		this.erinnerungEntry = erinnerungEntry;
+		this.isNewEntry = isNewEntry;
 		initUI();
 	}
 	
@@ -54,7 +65,7 @@ public class ErinnerungBearbeitenView extends JDialog {
 		
 		bearbeitenFertigButton.setSize(new Dimension(100, 20));
 		bearbeitenFertigButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		bearbeitenFertigButton.addActionListener(new JButtonListener(this));
+		bearbeitenFertigButton.addActionListener(new SafeErinnerungListener(this, erinnerungEntry, eView, isNewEntry));
 		
 		labelPanel.add(titelLabel);
 		labelPanel.add(dateLabel);
@@ -71,7 +82,19 @@ public class ErinnerungBearbeitenView extends JDialog {
 		
 		add(container);
 		
+		
+	}
+	
+	public void updateUI() {
+		
 	}
 
+	public JTextField getTitelTF() {
+		return titelTF;
+	}
+
+	public DateTimePicker getDateTimePicker() {
+		return dateTimePicker;
+	}
 	
 }

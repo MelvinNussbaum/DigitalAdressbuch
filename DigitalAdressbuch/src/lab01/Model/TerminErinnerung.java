@@ -2,8 +2,8 @@ package lab01.Model;
 
 public abstract class TerminErinnerung {
 	private String titel = "Neuer Eintrag";
-	private String date = null;
-	private String time = null;
+	private String date = "";
+	private String time = "";
 	
 	
 	public String getTitel() {
