@@ -1,4 +1,4 @@
-package lab01.Datenbank.Person;
+package DatenbankPerson;
 
 
 public class DBPerson {

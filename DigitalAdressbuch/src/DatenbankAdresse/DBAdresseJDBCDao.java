@@ -1,4 +1,4 @@
-package lab01.Datenbank.Adresse;
+package DatenbankAdresse;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class DBAdresseJDBCDao implements DBAdresseDao {
 			ps.setString(1, p.getStrasse());
 			ps.setString(2, p.getPostleitzahl());
 			ps.setString(3, p.getOrt());
-			ps.setString(4, p.getLand());
+			ps.setString(4, p.getLand());				/*Hier ist die Insertmethode, bei der man eine Adresse hinzufügen kann, mit allen Attributen*/
 			ps.executeUpdate();
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
@@ -40,12 +40,13 @@ public class DBAdresseJDBCDao implements DBAdresseDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				p = new DBAdresse();
-				p.setId(rs.getInt("id"));
+				p.setId(rs.getInt("id"));					/*Hier kann man nach einer bestimmten Strasse suchen*/
 				p.setStrasse(rs.getString("strasse"));
 				p.setPostleitzahl(rs.getString("postleitzahl"));
 				p.setOrt(rs.getString("ort"));
 				p.setLand(rs.getString("land"));
-				termine.add(p);}
+				termine.add(p);
+			}
 			return termine;
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
@@ -60,83 +61,87 @@ public class DBAdresseJDBCDao implements DBAdresseDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				p = new DBAdresse();
+				p = new DBAdresse();							/*Mit diesem Befehl werden alle Adressen geprintet*/
 				p.setId(rs.getInt("id"));
 				p.setStrasse(rs.getString("strasse"));
 				p.setPostleitzahl(rs.getString("postleitzahl"));
 				p.setOrt(rs.getString("ort"));
 				p.setLand(rs.getString("land"));
-				adresse.add(p);}
+				adresse.add(p);
+			}
 			return adresse;
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		}
 	}
-	
+
 	public void deleteAdresse(DBAdresse p) {
 		try {
 			String sql = "DELETE FROM adresse WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/*Mit diesem Befehl kann eine bestimmte Adresse gelöscht werden*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Delete Complete.");
 		}
 	}
-	
+
 	public void updateAdresseStrasse(DBAdresse p) {
 		try {
 			String sql = "Update adresse set strasse = ? where id = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getStrasse());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/*Hier kann man die Strasse bearbeiten / ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Update Strasse Complete. ");
 		}
 	}
+
 	public void updateAdressePostleitzahl(DBAdresse p) {
 		try {
 			String sql = "Update adresse set postleitzahl = ? where id = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getPostleitzahl());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/*Hier kann man die Postleitzahl bearbeiten / ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Update Postleitzahl Complete. ");
 		}
 	}
+
 	public void updateAdresseOrt(DBAdresse p) {
 		try {
 			String sql = "Update adresse set ort = ? where id = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getOrt());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/*Hier kann man den Ort bearbeiten / ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Update Ort Complete. ");
 		}
 	}
+
 	public void updateAdresseLand(DBAdresse p) {
 		try {
 			String sql = "Update adresse set land = ? where id = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getLand());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/*Hier kann man das Land bearbeiten / ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Update Land Complete. ");
 		}
 	}
-	
+
 }

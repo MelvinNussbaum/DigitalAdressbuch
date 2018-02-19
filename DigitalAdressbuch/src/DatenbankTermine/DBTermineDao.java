@@ -1,4 +1,4 @@
-package lab01.Datenbank.Termine;
+package DatenbankTermine;
 
 import java.util.List;
 

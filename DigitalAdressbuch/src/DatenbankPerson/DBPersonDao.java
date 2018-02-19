@@ -1,4 +1,4 @@
-package lab01.Datenbank.Person;
+package DatenbankPerson;
 
 import java.util.List;
 

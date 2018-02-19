@@ -1,4 +1,4 @@
-package lab01.Datenbank.Erinnerung;
+package DatenbankErinnerung;
 
 
 public class DBErinnerung {

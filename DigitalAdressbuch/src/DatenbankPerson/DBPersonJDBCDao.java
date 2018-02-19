@@ -1,4 +1,4 @@
-package lab01.Datenbank.Person;
+package DatenbankPerson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			ps.setString(1, p.getVorname());
 			ps.setString(2, p.getNachname());
 			ps.setString(3, p.getGeschlecht());
-			ps.setString(4, p.getTelefonnummer());
+			ps.setString(4, p.getTelefonnummer());			/*Mit der Insertmethode kann man eine Person der Datenbank hinzufügen*/ 
 			ps.setString(5, p.getGeburtstag());
 			ps.setString(6, p.getEmail());
 			ps.setString(7, p.getNotizen());
@@ -40,7 +40,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			String sql = "SELECT * FROM person where vorname = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getVorname());
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();				/*Mit dieser Methode kann man eine bestimmte Person beim Namen suchen*/
 			while (rs.next()) {
 				p = new DBPerson();
 				p.setId(rs.getInt("id"));
@@ -67,7 +67,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				p = new DBPerson();
-				p.setId(rs.getInt("id"));
+				p.setId(rs.getInt("id"));					/*Mit dieser Methode kann man sich alle Personen anzeigen lassen*/
 				p.setVorname(rs.getString("vorname"));
 				p.setNachname(rs.getString("nachname"));
 				p.setGeschlecht(rs.getString("geschlecht"));
@@ -87,7 +87,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			String sql = "DELETE FROM person WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();								/*Mit dieser Methode kann man eine Person löschen*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -101,7 +101,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getVorname());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();								/*Mit dieser Methode kann man den Vornamen einer Person ändern */
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -114,7 +114,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getNachname());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/* Mit dieser Methode kann man den Nachnamen einer Person ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -127,7 +127,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getGeschlecht());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();					/* Mit dieser Methode kann man das Geschlecht einer Person ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -140,7 +140,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getTelefonnummer());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/* Mit dieser Methode kann man die Telefonnummer einer Person ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -153,7 +153,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getGeburtstag());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/* Mit dieser Methode kann man kann man das Geburtstagsdatum ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -166,7 +166,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getEmail());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/* Mit dieser Methode kann man die E-Mail Adresse einer Person ändern*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -179,7 +179,7 @@ public class DBPersonJDBCDao implements DBPersonDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getNotizen());
 			ps.setInt(2, p.getId());
-			ps.executeUpdate();
+			ps.executeUpdate();						/* Mit dieser Methode kann man die Notizen über eine Person ändern */
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		} finally {
