@@ -1,4 +1,4 @@
-package DatenbankPerson;
+package lab01.Datenbank.Person;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

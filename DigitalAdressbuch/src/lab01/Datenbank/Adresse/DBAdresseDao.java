@@ -1,4 +1,4 @@
-package DatenbankAdresse;
+package lab01.Datenbank.Adresse;
 
 import java.util.List;
 

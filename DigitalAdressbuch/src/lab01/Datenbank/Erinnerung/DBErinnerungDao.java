@@ -1,4 +1,4 @@
-package DatenbankErinnerung;
+package lab01.Datenbank.Erinnerung;
 
 import java.util.List;
 

@@ -1,13 +1,14 @@
-package DatenbankTermine;
+package lab01.Datenbank.Person;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import lab01.Datenbank.Person.DBConnection;
 
-public class DBConnectionTermine {
+public class DBConnection {
 
-	private static DBConnectionTermine dbconnection = null;
+	private static DBConnection dbconnection = null;
 
 	private final String dbURL = "jdbc:mysql://localhost:3306/adressbuch";
 	private final String dbUser = "root";
@@ -15,7 +16,7 @@ public class DBConnectionTermine {
 
 	private Connection connection = null;
 
-	private DBConnectionTermine() {
+	private DBConnection() {
 	}
 
 	public Connection getConnection() {
@@ -29,9 +30,9 @@ public class DBConnectionTermine {
 		return connection;
 	}
 
-	public static DBConnectionTermine getInstance() {
+	public static DBConnection getInstance() {
 		if (dbconnection == null) {
-			dbconnection = new DBConnectionTermine();
+			dbconnection = new DBConnection();
 		}
 		return dbconnection;
 	}

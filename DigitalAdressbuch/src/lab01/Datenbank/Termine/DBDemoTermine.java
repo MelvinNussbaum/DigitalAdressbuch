@@ -1,4 +1,4 @@
-package DatenbankTermine;
+package lab01.Datenbank.Termine;
 
 import java.sql.Connection;
 

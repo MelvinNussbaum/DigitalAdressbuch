@@ -1,10 +1,10 @@
-package DatenbankErinnerung;
+package lab01.Datenbank.Erinnerung;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import DatenbankErinnerung.DBConnectionErinnerung;
+import lab01.Datenbank.Erinnerung.DBConnectionErinnerung;
 
 public class DBConnectionErinnerung {
 

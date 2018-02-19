@@ -1,4 +1,4 @@
-package DatenbankPerson;
+package lab01.Datenbank.Person;
 
 //import javax.swing.JFrame;
 //

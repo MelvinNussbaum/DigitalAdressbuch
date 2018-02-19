@@ -116,7 +116,6 @@ public class ErinnerungView extends JDialog {
 
 				erinnerungView.pack();
 				erinnerungView.setVisible(true);
-				// ErinnerungEntry e1 = new ErinnerungEntry(erinnerungView.getSouthpanel(), erinnerungView);
 
 			}
 		});

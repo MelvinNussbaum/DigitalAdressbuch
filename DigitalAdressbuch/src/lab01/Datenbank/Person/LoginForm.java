@@ -1,7 +1,7 @@
 /**
  * 
  */
-package DatenbankPerson;
+package lab01.Datenbank.Person;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
