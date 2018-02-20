@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.net.URL;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -20,7 +19,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import DatenbankErinnerung.DBConnectionErinnerung;
