@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 
 import com.github.lgooddatepicker.components.DateTimePicker;
 
-import lab01.Datenbank.Erinnerung.DBErinnerung;
+import DatenbankErinnerung.DBErinnerung;
 import lab01.Listener.SafeErinnerungListener;
 
 public class ErinnerungBearbeitenView extends JDialog {

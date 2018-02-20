@@ -74,5 +74,6 @@ zeit varchar(45),
 datum varchar(45),
 erinnerungsname varchar(45)
 );
+select*from erinnerungen;
 
 drop table erinnerungen;

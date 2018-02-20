@@ -16,7 +16,6 @@ import javax.swing.SwingUtilities;
 
 import com.github.lgooddatepicker.components.CalendarPanel;
 
-import lab01.Model.WeekCalendar.WeekCalendar;
 import lab01.View.ErinnerungView;
 
 public class KalenderView extends JFrame {

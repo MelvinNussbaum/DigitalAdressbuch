@@ -1,21 +1,23 @@
-package lab01.Datenbank.Erinnerung;
+package DatenbankErinnerung;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import lab01.Datenbank.Erinnerung.DBConnectionErinnerung;
+import DatenbankErinnerung.DBConnectionErinnerung;
 
 public class DBConnectionErinnerung {
 
 	private static DBConnectionErinnerung dbconnection = null;
 
 	private final String dbURL = "jdbc:mysql://localhost:3306/adressbuch";
-	private final String dbUser = "root";
+	private final String dbUser = "root";			/*Hier werden die URL, der User und das Passwort des Users definiert*/
 	private final String dbPW = "1234";
 
 	private Connection connection = null;
 
+	private DBConnectionErinnerung() {
+	}
 
 	public Connection getConnection() {
 		if (connection == null) {

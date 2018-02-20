@@ -2,12 +2,17 @@ package lab01.Datenbank.Erinnerung;
 
 import java.sql.Connection;
 
+import DatenbankErinnerung.DBConnectionErinnerung;
+import DatenbankErinnerung.DBErinnerung;
+import DatenbankErinnerung.DBErinnerungDao;
+import DatenbankErinnerung.DBErinnerungJDBCDao;
+
 public class DBDemoErinnerung {
 
 	public static void main(String[] args) {
 		DBErinnerung p = new DBErinnerung();
 		Connection con = DBConnectionErinnerung.getInstance().getConnection();
-		DBErinnerungDao pd = new DBEinnerungJDBCDao(con);
+		DBErinnerungDao pd = new DBErinnerungJDBCDao(con);
 
 		p.setZeit("9:41");
 		p.setDatum("16. August 2016");

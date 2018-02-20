@@ -12,51 +12,58 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import lab01.Datenbank.Erinnerung.DBErinnerung;
+import DatenbankErinnerung.DBErinnerung;
+import lab01.Listener.CheckBoxListener;
+import lab01.Listener.DeleteErinnerungListener;
 import lab01.Listener.EditErinnerungListener;
 import lab01.View.ErinnerungView;
 
 public class ErinnerungEntry extends TerminErinnerung {
 	private boolean erledigt = false;
-	private static final Icon editIcon = ErinnerungView.loadIcon("editIcon.png");
+	private static final Icon smallDeleteIcon = ErinnerungView.loadIcon("smallDeleteIcon.png");
 	private JPanel ePanel;
 	
 	private JLabel titelLabel;
 	private JLabel datetimeLabel;
-	private DBErinnerung erinnerungDB;
 	
-
+	private CustomCheckBox checkBox;
+	private DBErinnerung erinnerungDB;
+	private ErinnerungView eView;
+	
+	
 	public ErinnerungEntry(ErinnerungView eView, DBErinnerung erinnerungDB) {
+		this.eView = eView;
 		this.erinnerungDB = erinnerungDB;
 		titelLabel = new JLabel(erinnerungDB.getErinnerungsname());
 		datetimeLabel = new JLabel(erinnerungDB.getDatum() + ", " + erinnerungDB.getZeit());
 		JPanel erinnerungLabelPanel = new JPanel(new BorderLayout());
 		ePanel = new JPanel(new BorderLayout());
 		JPanel checkBoxTeiler = new JPanel();
-		JButton editButton = new JButton(editIcon);
-		CustomCheckBox checkBox = new CustomCheckBox();
+		JButton deleteButton = new JButton(smallDeleteIcon);
+		checkBox = new CustomCheckBox();
 		
  		titelLabel.setFont(new Font("Sans-Serif", Font.BOLD, 18));
  		datetimeLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 15));
- 		editButton.setVerticalTextPosition(SwingConstants.BOTTOM);
- 		editButton.setHorizontalTextPosition(SwingConstants.CENTER);
- 		editButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.LIGHT_GRAY));
- 		editButton.setOpaque(false);
- 		editButton.setContentAreaFilled(false);
- 		editButton.setPreferredSize(new Dimension(40, 40));
- 		editButton.setActionCommand("edit");
- 		editButton.addActionListener(new EditErinnerungListener(erinnerungDB, eView));
+ 		deleteButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+ 		deleteButton.setHorizontalTextPosition(SwingConstants.CENTER);
+ 		deleteButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.LIGHT_GRAY));
+ 		deleteButton.setOpaque(false);
+ 		deleteButton.setContentAreaFilled(false);
+ 		deleteButton.setPreferredSize(new Dimension(40, 40));
+ 		deleteButton.setActionCommand("edit");
+ 		deleteButton.addActionListener(new DeleteErinnerungListener(this, erinnerungDB, eView));
  		
+ 		checkBox.addItemListener(new CheckBoxListener(this));
  		checkBoxTeiler.add(checkBox);
  		ePanel.setBorder(BorderFactory.createRaisedBevelBorder());
  		ePanel.setPreferredSize(new Dimension(320, 47));;
-//		ePanel.setPreferredSize(new Dimension(300, 50));
 		erinnerungLabelPanel.add(titelLabel, BorderLayout.NORTH);
 		erinnerungLabelPanel.add(datetimeLabel, BorderLayout.SOUTH);
 		erinnerungLabelPanel.setPreferredSize(new Dimension(ePanel.getWidth() - 110, ePanel.getHeight()));
+		erinnerungLabelPanel.addMouseListener(new EditErinnerungListener(erinnerungDB, eView, this));
 		ePanel.add(checkBoxTeiler, BorderLayout.WEST);
 		ePanel.add(erinnerungLabelPanel, BorderLayout.CENTER);
-		ePanel.add(editButton, BorderLayout.EAST);
+		ePanel.add(deleteButton, BorderLayout.EAST);
 	}
 	
 	public JPanel getEPanel() {
@@ -69,6 +76,8 @@ public class ErinnerungEntry extends TerminErinnerung {
 
 	public void setErledigt(boolean erledigt) {
 		this.erledigt = erledigt;
+		erinnerungDB.setErledigt(erledigt);
+		eView.getPd().updateErledigt(erinnerungDB);
 	}
 	
 	@Override
@@ -90,5 +99,13 @@ public class ErinnerungEntry extends TerminErinnerung {
 
 	public void setErinnerungDB(DBErinnerung erinnerungDB) {
 		this.erinnerungDB = erinnerungDB;
+	}
+
+	public CustomCheckBox getCheckBox() {
+		return checkBox;
+	}
+
+	public void setCheckBox(CustomCheckBox checkBox) {
+		this.checkBox = checkBox;
 	}
 }

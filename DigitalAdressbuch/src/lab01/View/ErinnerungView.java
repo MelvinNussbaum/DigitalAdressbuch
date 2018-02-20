@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.net.URL;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -18,12 +19,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-import lab01.Datenbank.Erinnerung.DBConnectionErinnerung;
-import lab01.Datenbank.Erinnerung.DBEinnerungJDBCDao;
-import lab01.Datenbank.Erinnerung.DBErinnerung;
-import lab01.Datenbank.Erinnerung.DBErinnerungDao;
+import DatenbankErinnerung.DBConnectionErinnerung;
+import DatenbankErinnerung.DBErinnerung;
+import DatenbankErinnerung.DBErinnerungDao;
+import DatenbankErinnerung.DBErinnerungJDBCDao;
 import lab01.Listener.NeueErinnerungListener;
 import lab01.Model.ErinnerungEntry;
 import lab01.Model.RoundedBorder;
@@ -35,17 +37,19 @@ public class ErinnerungView extends JDialog {
 	private List<JPanel> entries = new ArrayList<JPanel>();
 
 	private Calendar cal = Calendar.getInstance();
-	static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 	
 	private Connection con = DBConnectionErinnerung.getInstance().getConnection();		
-	private DBErinnerungDao pd = new DBEinnerungJDBCDao(con);
+	private DBErinnerungDao pd = new DBErinnerungJDBCDao(con);
 
 	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
 
 	protected final JButton neueErinnerungButton = new JButton("Neue ErinnerungEntry", neuerEintragIcon);
-
+	
 	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	private final JPanel southPanel = new JPanel();
+	
+	protected final JScrollPane scrollPane = new JScrollPane(southPanel.getParent());
 
 	protected JLabel uhrzeit;
 
@@ -61,8 +65,11 @@ public class ErinnerungView extends JDialog {
 		setPreferredSize(new Dimension(350, 500));
 		
 		for (DBErinnerung entry : pd.getAllErinnerung()) {
-			entries.add(new ErinnerungEntry(this, entry).getEPanel());
-		}
+			ErinnerungEntry eEntry = new ErinnerungEntry(this, entry);
+			if (entry.isErledigt()) {
+				eEntry.getCheckBox().setSelected(true); 
+			}
+			entries.add(eEntry.getEPanel());		}
 		for (JPanel entry : entries) {
 			southPanel.add(entry);
 		}
@@ -78,7 +85,11 @@ public class ErinnerungView extends JDialog {
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
 		
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+	    scrollPane.setBounds(50, 30, 300, 50);
+		
 		southPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		southPanel.add(scrollPane);
 
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
@@ -86,12 +97,24 @@ public class ErinnerungView extends JDialog {
 
 	}
 	
-	private void updateUI() {
+	public void updateUI() {
 		southPanel.removeAll();
+		entries.removeAll(entries);
 		
+		for (DBErinnerung entry : pd.getAllErinnerung()) {
+			ErinnerungEntry eEntry = new ErinnerungEntry(this, entry);
+			if (entry.isErledigt()) {
+				eEntry.getCheckBox().setSelected(true); 
+			}
+			entries.add(eEntry.getEPanel());
+		}
 		for (JPanel entry : entries) {
 			southPanel.add(entry);
 		}
+		
+		cal = Calendar.getInstance();
+		uhrzeit.setText(sdf.format(getCal().getTime()) + "  ");
+		
 		this.revalidate();
 		this.repaint();
 	}
@@ -109,14 +132,16 @@ public class ErinnerungView extends JDialog {
 	public void addErinnerungEntry(DBErinnerung erinnerungDB, boolean isNewEntry) {
 		if (isNewEntry) {
 			pd.insertErinnerung(erinnerungDB);
-			ErinnerungEntry eEntry = new ErinnerungEntry(this, erinnerungDB);
-			entries.add(eEntry.getEPanel());
 		} else {
+			pd.deleteErinnerung(erinnerungDB);
 			pd.updateErinnerungDatum(erinnerungDB);
 			pd.updateErinnerungDatum(erinnerungDB);
 			pd.updateErinnerungZeit(erinnerungDB);
-			
+			pd.insertErinnerung(erinnerungDB);
 		}
+		
+		ErinnerungEntry eEntry = new ErinnerungEntry(this, erinnerungDB);
+		entries.add(eEntry.getEPanel());
 		updateUI();
 	}
 	
@@ -136,6 +161,18 @@ public class ErinnerungView extends JDialog {
 
 	public JPanel getSouthpanel() {
 		return southPanel;
+	}
+
+	public List<JPanel> getEntries() {
+		return entries;
+	}
+
+	public DBErinnerungDao getPd() {
+		return pd;
+	}
+
+	public void setPd(DBErinnerungDao pd) {
+		this.pd = pd;
 	}
 
 	public static void main(String[] args) {
