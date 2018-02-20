@@ -72,7 +72,8 @@ create table erinnerungen (
 id int not null auto_increment primary key,
 zeit varchar(45),
 datum varchar(45),
-erinnerungsname varchar(45)
+erinnerungsname varchar(45),
+erledigt boolean
 );
 select*from erinnerungen;
 
