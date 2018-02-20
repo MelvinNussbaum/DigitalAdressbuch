@@ -87,10 +87,10 @@ public class ErinnerungView extends JDialog {
 		northPanel.add(uhrzeit);
 		
 	    scrollBar.setEnabled(true);
-	    scrollBar
+//	    scrollBar
 		
 		southPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-		southPanel.add(scrollPane);
+//		southPanel.add(scrollPane);
 
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
