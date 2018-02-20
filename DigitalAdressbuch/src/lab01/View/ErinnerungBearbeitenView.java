@@ -54,7 +54,7 @@ public class ErinnerungBearbeitenView extends JDialog {
 	}
 	
 	private void initUI() {
-		setTitle("Erinnerungen");
+		setTitle("Erinnerungen");s
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
