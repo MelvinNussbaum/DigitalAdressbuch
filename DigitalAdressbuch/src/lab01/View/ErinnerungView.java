@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -49,7 +50,7 @@ public class ErinnerungView extends JDialog {
 	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	private final JPanel southPanel = new JPanel();
 	
-	protected final JScrollPane scrollPane = new JScrollPane(southPanel.getParent());
+	protected final JScrollBar scrollBar = new JScrollBar();
 
 	protected JLabel uhrzeit;
 
@@ -85,8 +86,8 @@ public class ErinnerungView extends JDialog {
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
 		
-	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-	    scrollPane.setBounds(50, 30, 300, 50);
+	    scrollBar.setEnabled(true);
+	    scrollBar
 		
 		southPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		southPanel.add(scrollPane);
