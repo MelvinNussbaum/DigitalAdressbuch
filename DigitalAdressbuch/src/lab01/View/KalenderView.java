@@ -1,4 +1,4 @@
-package lab01.Model;
+package lab01.View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,6 +16,8 @@ import javax.swing.SwingUtilities;
 
 import com.github.lgooddatepicker.components.CalendarPanel;
 
+import lab01.Model.RoundedBorder;
+import lab01.Model.Termin;
 import lab01.View.ErinnerungView;
 
 public class KalenderView extends JFrame {
