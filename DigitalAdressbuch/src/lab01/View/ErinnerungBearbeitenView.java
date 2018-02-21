@@ -45,7 +45,6 @@ public class ErinnerungBearbeitenView extends JDialog {
 
 
 	
-	
 	public ErinnerungBearbeitenView(ErinnerungView eView, DBErinnerung erinnerungDB, boolean isNewEntry) {
 		this.eView = eView;
 		this.erinnerungDB = erinnerungDB;

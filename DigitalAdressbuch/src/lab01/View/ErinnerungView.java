@@ -3,7 +3,6 @@ package lab01.View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.net.URL;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -18,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -44,12 +42,16 @@ public class ErinnerungView extends JDialog {
 
 	protected static final Icon neuerEintragIcon = loadIcon("neueErinnerung.PNG");
 
-	protected final JButton neueErinnerungButton = new JButton("Neue ErinnerungEntry", neuerEintragIcon);
+	protected final JButton neueErinnerungButton = new JButton("Neue Erinnerung", neuerEintragIcon);
 	
-	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
-	private final JPanel southPanel = new JPanel();
+	protected final JPanel northPanel = new JPanel(new BorderLayout());
+	protected final JPanel buttonPanel = new JPanel();
+	protected final JPanel timePanel = new JPanel();
 	
-	protected final JScrollBar scrollPane = new JScrollBar();
+	protected final JPanel southPanel = new JPanel();
+	protected final JPanel container = new JPanel(new BorderLayout(0, 0));
+	
+	protected final JScrollPane scrollPane = new JScrollPane(container);
 
 	protected JLabel uhrzeit;
 
@@ -75,25 +77,32 @@ public class ErinnerungView extends JDialog {
 		}
 		
 		neueErinnerungButton.setBorder(new RoundedBorder(20));
-		neueErinnerungButton.setPreferredSize(new Dimension(200, 30));
+		neueErinnerungButton.setPreferredSize(new Dimension(170, 30));
 		neueErinnerungButton.addActionListener(new NeueErinnerungListener(this, new DBErinnerung()));
-
+		neueErinnerungButton.setHorizontalAlignment(JButton.LEFT);
+		
 		uhrzeit = new JLabel(sdf.format(getCal().getTime()) + "  ");
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
 		uhrzeit.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
 
-		northPanel.add(neueErinnerungButton);
-		northPanel.add(uhrzeit);
+		buttonPanel.add(neueErinnerungButton);
+		timePanel.add(uhrzeit);
 		
-		southPanel.setPreferredSize(new Dimension(350, 400));		
+		northPanel.setPreferredSize(new Dimension(300, 40));
+		northPanel.add(buttonPanel, BorderLayout.WEST);
+		northPanel.add(timePanel, BorderLayout.EAST);
+				
+		southPanel.setPreferredSize(new Dimension(300, entries.size()*51 + 40));
 		southPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		
-		//TODO add ScrollBar
+		container.add(northPanel, BorderLayout.NORTH);
+		container.add(southPanel, BorderLayout.CENTER);
 		
-		add(northPanel, BorderLayout.NORTH);
-		add(southPanel, BorderLayout.CENTER);
+		add(scrollPane);
 		
-
+		pack();
+		setVisible(true);
+		
 	}
 	
 	public void updateUI() {
@@ -113,7 +122,8 @@ public class ErinnerungView extends JDialog {
 		
 		cal = Calendar.getInstance();
 		uhrzeit.setText(sdf.format(getCal().getTime()) + "  ");
-		
+		southPanel.setPreferredSize(new Dimension(300, entries.size()*51 + 40));
+
 		this.revalidate();
 		this.repaint();
 	}
@@ -180,9 +190,6 @@ public class ErinnerungView extends JDialog {
 			@Override
 			public void run() {
 				ErinnerungView erinnerungView = new ErinnerungView();
-
-				erinnerungView.pack();
-				erinnerungView.setVisible(true);
 
 			}
 		});

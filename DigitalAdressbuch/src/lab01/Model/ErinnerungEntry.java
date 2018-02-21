@@ -56,7 +56,7 @@ public class ErinnerungEntry extends TerminErinnerung {
  		checkBox.addItemListener(new CheckBoxListener(this));
  		checkBoxTeiler.add(checkBox);
  		ePanel.setBorder(BorderFactory.createRaisedBevelBorder());
- 		ePanel.setPreferredSize(new Dimension(320, 47));;
+ 		ePanel.setPreferredSize(new Dimension(305, 47));;
 		erinnerungLabelPanel.add(titelLabel, BorderLayout.NORTH);
 		erinnerungLabelPanel.add(datetimeLabel, BorderLayout.SOUTH);
 		erinnerungLabelPanel.setPreferredSize(new Dimension(ePanel.getWidth() - 110, ePanel.getHeight()));
