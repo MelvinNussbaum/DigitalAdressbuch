@@ -11,13 +11,15 @@ telefonnummer varchar(45),
 geburtstag varchar(45),
 email varchar(45),
 profilbild longblob,
-notizen varchar(500)
+notizen varchar(500),
+termine_id int not null,
+FOREIGN KEY (termine_id) references termine(id)
 );
 
 insert into person
-(vorname, nachname, geschlecht, telefonnummer, geburtstag, email, profilbild, notizen)
+(vorname, nachname, geschlecht, telefonnummer, geburtstag, email, profilbild, notizen, termine_id)
 values 
-('Albert', 'Einstein', 'männlich', '087 435 12 65', '14. März 1879', 'gravity.lover@gmail.com', 'D:\Users\zmeieb\Pictures\Projekt\Albert.jpg', 'Intelligent, schlau, verstorben');
+('Albert', 'Einstein', 'männlich', '087 435 12 65', '14. März 1879', 'gravity.lover@gmail.com', 'D:\Users\zmeieb\Pictures\Projekt\Albert.jpg', 'Intelligent, schlau, verstorben', 1);
 
 explain person;
 

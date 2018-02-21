@@ -8,6 +8,8 @@ public interface DBPersonDao {
 	public abstract void deletePerson(DBPerson p);
 	public abstract List<DBPerson> findPersonByName(DBPerson p);;
 	public abstract List<DBPerson> getAllPersons();
+	public abstract List<DBPerson> getAllKontakte();
+	public abstract List<DBPerson> getAllPersonsTermine();
 	
 	public abstract void updatePersonVorname(DBPerson p);
 	public abstract void updatePersonNachname(DBPerson p);
