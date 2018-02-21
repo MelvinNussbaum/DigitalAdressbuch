@@ -12,6 +12,5 @@ public interface DBErinnerungDao {
 	public abstract void updateErinnerungZeit(DBErinnerung p);
 	public abstract void updateErinnerungDatum(DBErinnerung p);
 	public abstract void updateErinnerungName(DBErinnerung p);
-	public abstract void updateErledigt(DBErinnerung p);
 	
 }
