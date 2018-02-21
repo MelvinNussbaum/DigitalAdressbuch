@@ -19,6 +19,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import DatenbankErinnerung.DBConnectionErinnerung;
@@ -48,7 +49,7 @@ public class ErinnerungView extends JDialog {
 	protected final JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	private final JPanel southPanel = new JPanel();
 	
-	protected final JScrollBar scrollBar = new JScrollBar();
+	protected final JScrollBar scrollPane = new JScrollBar();
 
 	protected JLabel uhrzeit;
 
@@ -84,12 +85,11 @@ public class ErinnerungView extends JDialog {
 		northPanel.add(neueErinnerungButton);
 		northPanel.add(uhrzeit);
 		
-	    scrollBar.setEnabled(true);
-//	    scrollBar
-		
+		southPanel.setPreferredSize(new Dimension(350, 400));		
 		southPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-//		southPanel.add(scrollPane);
-
+		
+		//TODO add ScrollBar
+		
 		add(northPanel, BorderLayout.NORTH);
 		add(southPanel, BorderLayout.CENTER);
 		
