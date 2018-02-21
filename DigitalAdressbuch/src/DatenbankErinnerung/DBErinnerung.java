@@ -7,7 +7,7 @@ public class DBErinnerung {
 	private String zeit;
 	private String datum;
 	private String erinnerungsname;
-
+	private boolean erledigt;
 
 	public String toString(){
 		String result = "";
@@ -15,6 +15,7 @@ public class DBErinnerung {
 		result += this.zeit + " ";
 		result += this.datum + " ";
 		result += this.erinnerungsname + " ";
+		result += this.erledigt + " ";
 		return result;
 	}
 
@@ -49,5 +50,15 @@ public class DBErinnerung {
 
 	public void setErinnerungsname(String erinnerungsname) {
 		this.erinnerungsname = erinnerungsname;
+	}
+
+
+	public boolean isErledigt() {
+		return erledigt;
+	}
+
+
+	public void setErledigt(boolean erledigt) {
+		this.erledigt = erledigt;
 	}
 }

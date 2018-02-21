@@ -17,11 +17,12 @@ public class DBErinnerungJDBCDao implements DBErinnerungDao {
 
 	public void insertErinnerung(DBErinnerung p) {
 		try {
-			String sql = "INSERT INTO erinnerungen (zeit, datum, erinnerungsname) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO erinnerungen (zeit, datum, erinnerungsname, erledigt) VALUES (?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, p.getZeit());
 			ps.setString(2, p.getDatum());
-			ps.setString(3, p.getErinnerungsname());	
+			ps.setString(3, p.getErinnerungsname());
+			ps.setBoolean(4, p.isErledigt());
 			ps.executeUpdate();							/*Die Insertmethode, um eine Person in eine Datenbank hinzufügen können*/
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
@@ -62,6 +63,7 @@ public class DBErinnerungJDBCDao implements DBErinnerungDao {
 				p.setZeit(rs.getString("zeit"));
 				p.setDatum(rs.getString("datum"));
 				p.setErinnerungsname(rs.getString("erinnerungsname"));
+				p.setErledigt(rs.getBoolean("erledigt"));
 				erinnerungen.add(p);}
 			return erinnerungen;
 		} catch (SQLException ex) {
@@ -119,5 +121,18 @@ public class DBErinnerungJDBCDao implements DBErinnerungDao {
 			System.out.println("Update Erinnerungsname Complete. ");
 		}
 	}
+	public void updateErledigt(DBErinnerung p) {
+		 	try {
+		 		String sql = "Update erinnerungen set erledigt = ? where id = ? ";
+		 		PreparedStatement ps = con.prepareStatement(sql);
+		 		ps.setBoolean(1, p.isErledigt());
+		 		ps.setInt(2, p.getId());
+		 		ps.executeUpdate();							/*Mit dieser Methode kann man den Namen einer Erinnerung bearbeiten / ändern*/
+		 	} catch (SQLException ex) {
+		 		throw new RuntimeException(ex);
+		 	} finally {
+		 		System.out.println("Update erledigt Complete. ");
+		 	}
+		}
 
 }
