@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 public class CalendarEvent {
 
-    private static final Color DEFAULT_COLOR = Color.PINK;
+    private static final Color DEFAULT_COLOR = Color.BLUE;
 
     private LocalDate date;
     private LocalTime start;

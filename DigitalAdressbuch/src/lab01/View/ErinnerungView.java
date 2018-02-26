@@ -50,7 +50,7 @@ public class ErinnerungView extends JDialog {
 	
 	protected final JPanel southPanel = new JPanel();
 	protected final JPanel container = new JPanel(new BorderLayout(0, 0));
-	
+
 	protected final JScrollPane scrollPane = new JScrollPane(container);
 
 	protected JLabel uhrzeit;
@@ -62,7 +62,7 @@ public class ErinnerungView extends JDialog {
 	private void initUI() {
 		
 		setTitle("Erinnerungen");
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(350, 500));
 		
@@ -77,13 +77,14 @@ public class ErinnerungView extends JDialog {
 		}
 		
 		neueErinnerungButton.setBorder(new RoundedBorder(20));
-		neueErinnerungButton.setPreferredSize(new Dimension(170, 30));
+		neueErinnerungButton.setPreferredSize(new Dimension(160, 30));
 		neueErinnerungButton.addActionListener(new NeueErinnerungListener(this, new DBErinnerung()));
 		neueErinnerungButton.setHorizontalAlignment(JButton.LEFT);
 		
 		uhrzeit = new JLabel(sdf.format(getCal().getTime()) + "  ");
 		uhrzeit.setHorizontalAlignment(JLabel.RIGHT);
-		uhrzeit.setFont(new Font("Sans-Serif", Font.PLAIN, 16));
+		uhrzeit.setVerticalAlignment(JLabel.CENTER);
+		uhrzeit.setFont(new Font("Sans-Serif", Font.PLAIN, 20));
 
 		buttonPanel.add(neueErinnerungButton);
 		timePanel.add(uhrzeit);
@@ -144,7 +145,6 @@ public class ErinnerungView extends JDialog {
 		} else {
 			pd.deleteErinnerung(erinnerungDB);
 			pd.updateErinnerungDatum(erinnerungDB);
-			pd.updateErinnerungDatum(erinnerungDB);
 			pd.updateErinnerungZeit(erinnerungDB);
 			pd.insertErinnerung(erinnerungDB);
 		}
@@ -189,8 +189,7 @@ public class ErinnerungView extends JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				ErinnerungView erinnerungView = new ErinnerungView();
-
+				new ErinnerungView();
 			}
 		});
 

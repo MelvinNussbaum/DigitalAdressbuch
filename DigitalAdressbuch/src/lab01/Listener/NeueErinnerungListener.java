@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import DatenbankErinnerung.DBErinnerung;
 import lab01.View.ErinnerungBearbeitenView;
+import lab01.View.ErinnerungView;
 
 public class NeueErinnerungListener implements ActionListener {
 	private ErinnerungView view;

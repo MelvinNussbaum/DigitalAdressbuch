@@ -20,8 +20,8 @@ public abstract class Calendar extends JComponent {
 
 	private static final long serialVersionUID = 7679148141423719103L;
 	
-	protected static final LocalTime START_TIME = LocalTime.of(9, 0);
-    protected static final LocalTime END_TIME = LocalTime.of(17, 0);
+	protected static final LocalTime START_TIME = LocalTime.of(0, 0);
+    protected static final LocalTime END_TIME = LocalTime.of(22, 0);
 
     protected static final int MIN_WIDTH = 600;
     protected static final int MIN_HEIGHT = MIN_WIDTH;

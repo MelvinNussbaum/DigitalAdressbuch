@@ -3,9 +3,11 @@ package DatenbankTermine;
 public class DBTermine {
 
 	private int id;
+	private String datum;
 	private String startzeit;
 	private String endzeit;
 	private String terminname;
+	private String farbe;
 	private String relevanz;
 
 	public int getId() {
@@ -14,6 +16,14 @@ public class DBTermine {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getDatum() {
+		return datum;
+	}
+
+	public void setDatum(String datum) {
+		this.datum = datum;
 	}
 
 	public String getStartzeit() {
@@ -40,6 +50,14 @@ public class DBTermine {
 		this.terminname = terminname;
 	}
 
+	public String getFarbe() {
+		return farbe;
+	}
+
+	public void setFarbe(String farbe) {
+		this.farbe = farbe;
+	}
+
 	public String getRelevanz() {
 		return relevanz;
 	}
@@ -57,4 +75,5 @@ public class DBTermine {
 		result += this.relevanz + " ";
 		return result;
 	}
+
 }

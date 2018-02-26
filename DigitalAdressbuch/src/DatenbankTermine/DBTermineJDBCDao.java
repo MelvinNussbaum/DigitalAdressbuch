@@ -87,6 +87,20 @@ public class DBTermineJDBCDao implements DBTermineDao {
 			System.out.println("Delete Complete.");
 		}
 	}
+	
+	public void updateTermineDatum(DBTermine p) {
+		try {
+			String sql = "Update termine set datum = ? where id = ? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getDatum());
+			ps.setInt(2, p.getId());
+			ps.executeUpdate(); /* Mit dieser Methode kann man die Startzeit eines Termines bearbeiten */
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Update Datum Complete. ");
+		}
+	}	
 
 	public void updateTermineStartzeit(DBTermine p) {
 		try {
@@ -127,6 +141,20 @@ public class DBTermineJDBCDao implements DBTermineDao {
 			throw new RuntimeException(ex);
 		} finally {
 			System.out.println("Update Terminname Complete. ");
+		}
+	}
+	
+	public void updateTermineFarbe(DBTermine p) {
+		try {
+			String sql = "Update termine set farbe = ? where id = ? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, p.getFarbe());
+			ps.setInt(2, p.getId());
+			ps.executeUpdate(); /* Die Methode, um die Relevanz bei einem Termin zu bearbeiten können */
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} finally {
+			System.out.println("Update Farbe Complete. ");
 		}
 	}
 
